@@ -41,7 +41,7 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
       - name: Build and push image to Docker Hub
         run: |
-          docker build -t aammaul7/api-portfolio:latest .
-          docker push aammaul7/api-portfolio:latest
+          docker build -t també/api-portfolio:latest .
+          docker push també/api-portfolio:latest
       - name: Deploy to Vercel
-        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --scope ${{ secrets.VERCEL_ORG_ID }} --project ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --project ${{ secrets.VERCEL_PROJECT_ID }}
