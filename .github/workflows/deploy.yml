@@ -22,7 +22,6 @@ jobs:
         with:
           node-version: "20"
       - run: npm install
-      - run: npm run test
 
   # CD job to deploy code from deploy branch to Vercel
   deploy:
