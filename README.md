@@ -1,5 +1,13 @@
 # Portfolio API
 
+![GitHub forks](https://img.shields.io/github/forks/zvn7/api-portfolio?style=social)
+![GitHub stars](https://img.shields.io/github/stars/zvn7/api-portfolio?style=social)
+![GitHub issues](https://img.shields.io/github/issues/zvn7/api-portfolio)
+![GitHub license](https://img.shields.io/github/license/zvn7/api-portfolio)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/zvn7/api-portfolio)
+![Views](https://komarev.com/ghpvc/?username=zvn7&color=blue)
+![GitHub top language](https://img.shields.io/github/languages/top/zvn7/api-portfolio)
+
 This is a portfolio API built using Node.js, Express, and MongoDB. It manages projects, articles, experiences, skills, education, and certifications data.
 
 ## Features
