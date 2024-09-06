@@ -44,4 +44,4 @@ jobs:
           docker build -t aammaul7/api-portfolio:latest .
           docker push aammaul7/api-portfolio:latest
       - name: Deploy to Vercel
-        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }} --project ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
