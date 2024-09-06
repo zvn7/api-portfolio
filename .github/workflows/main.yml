@@ -3,14 +3,13 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - develop # CI triggered on develop branch
-      - deploy # CD triggered on deploy branch
+      - develop
+      - deploy
   pull_request:
     branches:
-      - develop # Run tests on pull requests to develop
+      - develop
 
 jobs:
-  # CI job to test code in develop branch
   build:
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
@@ -23,7 +22,6 @@ jobs:
           node-version: "20"
       - run: npm install
 
-  # CD job to deploy code from deploy branch to Vercel
   deploy:
     if: github.ref == 'refs/heads/deploy'
     runs-on: ubuntu-latest
