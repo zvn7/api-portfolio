@@ -21,6 +21,18 @@ jobs:
         with:
           node-version: "20"
       - run: npm install
+      - name: Build Docker Image for Local Testing
+        run: |
+          docker build -t api-portfolio:local .
+      - name: Run Docker Container Locally for Testing
+        run: |
+          docker run -d -p 3000:3000 --name api-portfolio-container api-portfolio:local
+      - name: Run Tests Inside Container
+        run: |
+          docker exec api-portfolio-container npm test
+      - name: Stop and Remove Docker Container
+        run: |
+          docker stop api-portfolio-container && docker rm api-portfolio-container
 
   deploy:
     if: github.ref == 'refs/heads/deploy'
