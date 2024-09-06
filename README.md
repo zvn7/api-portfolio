@@ -23,7 +23,7 @@ This is a portfolio API built using Node.js, Express, and MongoDB. It manages pr
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
+   git clone https://github.com/zvn7/api-portfolio.git
    ```
 
 2. Navigate into the project directory:
@@ -66,61 +66,61 @@ Here are the key endpoints for the API:
 
 ## Projects
 
-GET /api/v1/projects - Retrieve all projects
-POST /api/v1/projects - Create a new project (requires image upload)
-GET /api/v1/projects/:id - Retrieve a specific project
-PUT /api/v1/projects/:id - Update a project
-DELETE /api/v1/projects/:id - Delete a project
+- **GET** `/api/v1/projects` - Retrieve all projects
+- **POST** `/api/v1/projects` - Create a new project (requires image upload)
+- **GET** `/api/v1/projects/:id` - Retrieve a specific project
+- **PUT** `/api/v1/projects/:id` - Update a project
+- **DELETE** `/api/v1/projects/:id` - Delete a project
 
 ## Articles
 
-GET /api/v1/articles - Retrieve all articles
-POST /api/v1/articles - Create a new article (requires image upload)
-GET /api/v1/articles/:id - Retrieve a specific article
-PUT /api/v1/articles/:id - Update an article
-DELETE /api/v1/articles/:id - Delete an article
+- **GET** `/api/v1/articles` - Retrieve all articles
+- **POST** `/api/v1/articles` - Create a new article (requires image upload)
+- **GET** `/api/v1/articles/:id` - Retrieve a specific article
+- **PUT** `/api/v1/articles/:id` - Update an article
+- **DELETE** `/api/v1/articles/:id` - Delete an article
 
 ## Experience
 
-GET /api/v1/experiences - Retrieve all experiences
-POST /api/v1/experiences - Create a new experience
-GET /api/v1/experiences/:id - Retrieve a specific experience
-PUT /api/v1/experiences/:id - Update an experience
-DELETE /api/v1/experiences/:id - Delete an experience
+- **GET** `/api/v1/experiences` - Retrieve all experiences
+- **POST** `/api/v1/experiences` - Create a new experience
+- **GET** `/api/v1/experiences/:id` - Retrieve a specific experience
+- **PUT** `/api/v1/experiences/:id` - Update an experience
+- **DELETE** `/api/v1/experiences/:id` - Delete an experience
 
 ## Skills
 
-GET /api/v1/skills - Retrieve all skills
-POST /api/v1/skills - Create a new skill
-GET /api/v1/skills/:id - Retrieve a specific skill
-PUT /api/v1/skills/:id - Update a skill
-DELETE /api/v1/skills/:id - Delete a skill
+- **GET** `/api/v1/skills` - Retrieve all skills
+- **POST** `/api/v1/skills` - Create a new skill
+- **GET** `/api/v1/skills/:id` - Retrieve a specific skill
+- **PUT** `/api/v1/skills/:id` - Update a skill
+- **DELETE** `/api/v1/skills/:id` - Delete a skill
 
 ## Education
 
-GET /api/v1/educations - Retrieve all education entries
-POST /api/v1/educations - Create a new education entry
-GET /api/v1/educations/:id - Retrieve a specific education entry
-PUT /api/v1/educations/:id - Update an education entry
-DELETE /api/v1/educations/:id - Delete an education entry
+- **GET** `/api/v1/educations` - Retrieve all education entries
+- **POST** `/api/v1/educations` - Create a new education entry
+- **GET** `/api/v1/educations/:id` - Retrieve a specific education entry
+- **PUT** `/api/v1/educations/:id` - Update an education entry
+- **DELETE** `/api/v1/educations/:id` - Delete an education entry
 
 ## Certifications
 
-GET /api/v1/certifications - Retrieve all certifications
-POST /api/v1/certifications - Create a new certification
-GET /api/v1/certifications/:id - Retrieve a specific certification
-PUT /api/v1/certifications/:id - Update a certification
-DELETE /api/v1/certifications/:id - Delete a certification
+- **GET** `/api/v1/certifications` - Retrieve all certifications
+- **POST** `/api/v1/certifications` - Create a new certification
+- **GET** `/api/v1/certifications/:id` - Retrieve a specific certification
+- **PUT** `/api/v1/certifications/:id` - Update a certification
+- **DELETE** `/api/v1/certifications/:id` - Delete a certification
 
 ## Technologies Used
 
-Node.js: JavaScript runtime
-Express.js: Web framework for Node.js
-MongoDB: NoSQL database
-Mongoose: MongoDB object modeling for Node.js
-ImageKit: Image storage and management
-Multer: Middleware for handling multipart/form-data, used for uploading images
-dotenv: Environment variable management
+- **Node.js**: JavaScript runtime
+- **Express.js**: Web framework for Node.js
+- **MongoDB**: NoSQL database
+- **Mongoose**: MongoDB object modeling for Node.js
+- **ImageKit**: Image storage and management
+- **Multer**: Middleware for handling multipart/form-data, used for uploading images
+- **dotenv**: Environment variable management
 
 ## License
 
