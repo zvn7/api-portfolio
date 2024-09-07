@@ -1,11 +1,10 @@
 import Article from "../models/articlesModel.js";
 import imagekit from "../helpers/imagekit.js";
 
-// Helper function to calculate reading time
 const calculateReadingTime = (content) => {
-	const wordsPerMinute = 200; // Average reading speed
-	const textLength = content.split(/\s+/).length; // Word count
-	const minutes = Math.ceil(textLength / wordsPerMinute); // Calculate reading time
+	const wordsPerMinute = 200;
+	const textLength = content.split(/\s+/).length;
+	const minutes = Math.ceil(textLength / wordsPerMinute);
 	return minutes;
 };
 
@@ -33,32 +32,28 @@ export const getArticleById = async (req, res) => {
 // POST create a new article
 export const createArticle = async (req, res) => {
 	const { title, publicationDate, content, author, tags, summary } = req.body;
-	const image = req.file; // Get the uploaded file
+	const image = req.file;
 
 	if (!image) {
 		return res.status(400).json({ message: "Image is required" });
 	}
 
 	try {
-		// Upload image to ImageKit
 		const uploadedImage = await imagekit.upload({
 			file: image.buffer,
 			fileName: image.originalname,
 			folder: "articles",
 		});
 
-		// Get the URL of the uploaded image
 		const imageUrl = uploadedImage.url;
 
-		// Calculate reading time based on content
 		const readingTime = calculateReadingTime(content);
 
-		// Create a new article with image URL
 		const newArticle = new Article({
 			title,
 			publicationDate,
 			content,
-			image: imageUrl, // Image URL
+			image: imageUrl,
 			author,
 			tags,
 			readingTime,
@@ -78,17 +73,15 @@ export const updateArticle = async (req, res) => {
 		const article = await Article.findById(req.params.id);
 		if (!article) return res.status(404).json({ message: "Article not found" });
 
-		const image = req.file; // Get the uploaded file
+		const image = req.file;
 
 		if (image) {
-			// Upload image to ImageKit
 			const uploadedImage = await imagekit.upload({
 				file: image.buffer,
 				fileName: image.originalname,
 				folder: "articles",
 			});
 
-			// Update image URL
 			req.body.image = uploadedImage.url;
 		}
 
