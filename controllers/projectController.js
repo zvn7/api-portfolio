@@ -26,21 +26,19 @@ export const getProjectById = async (req, res) => {
 export const createProject = async (req, res) => {
 	const { title, description, category, technologies, url, repository } =
 		req.body;
-	let { image } = req.file; // Get the uploaded file
+	let { image } = req.file;
 
 	try {
-		// Upload image to ImageKit
 		if (image) {
 			const uploadedImage = await imagekit.upload({
-				file: image.buffer, // File buffer from multer
-				fileName: image.originalname, // Original file name
-				folder: "projects", // Optional folder in ImageKit
+				file: image.buffer,
+				fileName: image.originalname,
+				folder: "projects",
 			});
 
-			imageUrl = uploadedImage.url; // Get the URL of the uploaded image
+			imageUrl = uploadedImage.url;
 		}
 
-		// Create a new project with image URL
 		const newProject = new Project({
 			title,
 			description,
@@ -48,7 +46,7 @@ export const createProject = async (req, res) => {
 			technologies,
 			url,
 			repository,
-			image: imageUrl, // Image URL
+			image: imageUrl,
 		});
 
 		const savedProject = await newProject.save();
@@ -66,7 +64,6 @@ export const updateProject = async (req, res) => {
 
 		let { image } = req.file;
 
-		// Update image if a new one is provided
 		if (image) {
 			const uploadedImage = await imagekit.upload({
 				file: image.buffer,
