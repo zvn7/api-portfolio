@@ -26,7 +26,7 @@ export const getProjectById = async (req, res) => {
 export const createProject = async (req, res) => {
 	const { title, description, category, technologies, url, repository } =
 		req.body;
-	let { image } = req.file;
+	const image = req.file;
 
 	if (!image) {
 		return res.status(400).json({ message: "Image is required" });
@@ -64,7 +64,7 @@ export const updateProject = async (req, res) => {
 		const project = await Project.findById(req.params.id);
 		if (!project) return res.status(404).json({ message: "Project not found" });
 
-		let { image } = req.file;
+		const image = req.file;
 
 		if (image) {
 			const uploadedImage = await imagekit.upload({
