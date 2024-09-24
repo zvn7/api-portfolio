@@ -3,7 +3,7 @@ import Education from "../models/educationModel.js";
 // GET all education records
 export const getEducation = async (req, res) => {
 	try {
-		const educationRecords = await Education.find();
+		const educationRecords = await Education.find().sort({ createdAt: -1 });
 		res.json(educationRecords);
 	} catch (error) {
 		res.status(500).json({ message: error.message });

@@ -3,7 +3,7 @@ import Certification from "../models/certificationModel.js";
 // GET all certifications
 export const getCertifications = async (req, res) => {
 	try {
-		const certifications = await Certification.find();
+		const certifications = await Certification.find().sort({ createdAt: -1 });
 		res.json(certifications);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
