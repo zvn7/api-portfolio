@@ -23,22 +23,26 @@ export const getProjectById = async (req, res) => {
 };
 
 // POST create a new project
+// POST create a new project
 export const createProject = async (req, res) => {
 	const { title, description, category, technologies, url, repository } =
 		req.body;
 	let { image } = req.file;
 
+	let imageUrl = ""; // Inisialisasi imageUrl dengan nilai default
+
 	try {
+		// Cek jika ada file image yang di-upload
 		if (image) {
 			const uploadedImage = await imagekit.upload({
 				file: image.buffer,
 				fileName: image.originalname,
 				folder: "projects",
 			});
-
 			imageUrl = uploadedImage.url;
 		}
 
+		// Membuat project baru
 		const newProject = new Project({
 			title,
 			description,
@@ -46,7 +50,7 @@ export const createProject = async (req, res) => {
 			technologies,
 			url,
 			repository,
-			image: imageUrl,
+			image: imageUrl, // Tetapkan imageUrl, meskipun kosong
 		});
 
 		const savedProject = await newProject.save();
