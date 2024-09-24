@@ -28,16 +28,18 @@ export const createProject = async (req, res) => {
 		req.body;
 	let { image } = req.file;
 
-	try {
-		if (image) {
-			const uploadedImage = await imagekit.upload({
-				file: image.buffer,
-				fileName: image.originalname,
-				folder: "projects",
-			});
+	if (!image) {
+		return res.status(400).json({ message: "Image is required" });
+	}
 
-			imageUrl = uploadedImage.url;
-		}
+	try {
+		const uploadedImage = await imagekit.upload({
+			file: image.buffer,
+			fileName: image.originalname,
+			folder: "projects",
+		});
+
+		const imageUrl = uploadedImage.url;
 
 		const newProject = new Project({
 			title,
