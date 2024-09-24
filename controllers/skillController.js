@@ -3,7 +3,7 @@ import Skill from "../models/skillModel.js";
 // GET all skills
 export const getSkills = async (req, res) => {
 	try {
-		const skills = await Skill.find();
+		const skills = await Skill.find().sort({ createdAt: -1 });
 		res.json(skills);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
