@@ -28,6 +28,12 @@ export const createProject = async (req, res) => {
 		req.body;
 	const image = req.file;
 
+	// Pastikan kategori menjadi array, meskipun input berupa string
+	const categoriesArray =
+		typeof category === "string"
+			? category.split(",").map((item) => item.trim())
+			: category;
+
 	if (!image) {
 		return res.status(400).json({ message: "Image is required" });
 	}
@@ -44,7 +50,7 @@ export const createProject = async (req, res) => {
 		const newProject = new Project({
 			title,
 			description,
-			category,
+			category: categoriesArray, // Simpan sebagai array
 			technologies,
 			url,
 			repository,
@@ -65,6 +71,14 @@ export const updateProject = async (req, res) => {
 		if (!project) return res.status(404).json({ message: "Project not found" });
 
 		const image = req.file;
+
+		// Ubah kategori menjadi array jika inputnya berupa string
+		if (req.body.category) {
+			req.body.category =
+				typeof req.body.category === "string"
+					? req.body.category.split(",").map((item) => item.trim())
+					: req.body.category;
+		}
 
 		if (image) {
 			const uploadedImage = await imagekit.upload({
