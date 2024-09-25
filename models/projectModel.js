@@ -7,11 +7,11 @@ const projectSchema = new mongoose.Schema(
 			required: true,
 		},
 		description: {
-			type: [String],
+			type: String,
 			required: true,
 		},
 		category: {
-			type: String,
+			type: [String],
 			required: true,
 			enum: ["Website", "Application", "API", "UI/UX"],
 			message: "Category must be one of: Website, Application, API, UI/UX",
