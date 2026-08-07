@@ -11,10 +11,10 @@ const projectSchema = new mongoose.Schema(
 			required: true,
 		},
 		category: {
-			type: String,
+			type: [String],
 			required: true,
-			enum: ['website', 'aplikasi', 'api', 'uiux'],
-			message: 'Category must be one of: website, aplikasi, api, uiux'
+			enum: ["Website", "Application", "API", "UI/UX"],
+			message: "Category must be one of: Website, Application, API, UI/UX",
 		},
 		technologies: {
 			type: [String],

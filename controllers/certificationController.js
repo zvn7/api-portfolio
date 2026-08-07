@@ -3,7 +3,7 @@ import Certification from "../models/certificationModel.js";
 // GET all certifications
 export const getCertifications = async (req, res) => {
 	try {
-		const certifications = await Certification.find();
+		const certifications = await Certification.find().sort({ createdAt: -1 });
 		res.json(certifications);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
@@ -58,11 +58,10 @@ export const updateCertification = async (req, res) => {
 // DELETE a certification
 export const deleteCertification = async (req, res) => {
 	try {
-		const certification = await Certification.findById(req.params.id);
+		const certification = await Certification.findByIdAndDelete(req.params.id);
 		if (!certification)
 			return res.status(404).json({ message: "Certification not found" });
 
-		await certification.remove();
 		res.json({ message: "Certification deleted" });
 	} catch (error) {
 		res.status(500).json({ message: error.message });

@@ -8,10 +8,10 @@ const skillSchema = new mongoose.Schema(
 		},
 		category: {
 			type: String,
-			required: true, // frontend, backend, database, etc.
+			required: true,
 		},
 		level: {
-			type: String, // beginner, intermediate, advanced
+			type: String,
 			default: "beginner",
 		},
 	},

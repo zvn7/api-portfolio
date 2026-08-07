@@ -3,7 +3,7 @@ import Skill from "../models/skillModel.js";
 // GET all skills
 export const getSkills = async (req, res) => {
 	try {
-		const skills = await Skill.find();
+		const skills = await Skill.find().sort({ createdAt: -1 });
 		res.json(skills);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
@@ -51,10 +51,9 @@ export const updateSkill = async (req, res) => {
 // DELETE a skill
 export const deleteSkill = async (req, res) => {
 	try {
-		const skill = await Skill.findById(req.params.id);
+		const skill = await Skill.findByIdAndDelete(req.params.id);
 		if (!skill) return res.status(404).json({ message: "Skill not found" });
 
-		await skill.remove();
 		res.json({ message: "Skill deleted" });
 	} catch (error) {
 		res.status(500).json({ message: error.message });

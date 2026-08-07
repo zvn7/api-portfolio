@@ -3,7 +3,7 @@ import Education from "../models/educationModel.js";
 // GET all education records
 export const getEducation = async (req, res) => {
 	try {
-		const educationRecords = await Education.find();
+		const educationRecords = await Education.find().sort({ createdAt: -1 });
 		res.json(educationRecords);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
@@ -60,11 +60,10 @@ export const updateEducation = async (req, res) => {
 // DELETE an education record
 export const deleteEducation = async (req, res) => {
 	try {
-		const educationRecord = await Education.findById(req.params.id);
+		const educationRecord = await Education.findByIdAndDelete(req.params.id);
 		if (!educationRecord)
 			return res.status(404).json({ message: "Education record not found" });
 
-		await educationRecord.remove();
 		res.json({ message: "Education record deleted" });
 	} catch (error) {
 		res.status(500).json({ message: error.message });
