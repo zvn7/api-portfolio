@@ -96,10 +96,9 @@ export const updateArticle = async (req, res) => {
 // DELETE an article
 export const deleteArticle = async (req, res) => {
 	try {
-		const article = await Article.findById(req.params.id);
+		const article = await Article.findByIdAndDelete(req.params.id);
 		if (!article) return res.status(404).json({ message: "Article not found" });
 
-		await article.remove();
 		res.json({ message: "Article deleted" });
 	} catch (error) {
 		res.status(500).json({ message: error.message });

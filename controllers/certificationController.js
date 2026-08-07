@@ -58,11 +58,10 @@ export const updateCertification = async (req, res) => {
 // DELETE a certification
 export const deleteCertification = async (req, res) => {
 	try {
-		const certification = await Certification.findById(req.params.id);
+		const certification = await Certification.findByIdAndDelete(req.params.id);
 		if (!certification)
 			return res.status(404).json({ message: "Certification not found" });
 
-		await certification.remove();
 		res.json({ message: "Certification deleted" });
 	} catch (error) {
 		res.status(500).json({ message: error.message });

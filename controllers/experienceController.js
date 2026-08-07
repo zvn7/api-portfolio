@@ -59,11 +59,10 @@ export const updateExperience = async (req, res) => {
 // DELETE an experience
 export const deleteExperience = async (req, res) => {
 	try {
-		const experience = await Experience.findById(req.params.id);
+		const experience = await Experience.findByIdAndDelete(req.params.id);
 		if (!experience)
 			return res.status(404).json({ message: "Experience not found" });
 
-		await experience.remove();
 		res.json({ message: "Experience deleted" });
 	} catch (error) {
 		res.status(500).json({ message: error.message });

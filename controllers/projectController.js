@@ -3,110 +3,106 @@ import imagekit from "../helpers/imagekit.js";
 
 // GET all projects
 export const getProjects = async (req, res) => {
-	try {
-		const projects = await Project.find().sort({ createdAt: -1 });
-		res.json(projects);
-	} catch (error) {
-		res.status(500).json({ message: error.message });
-	}
+    try {
+        const projects = await Project.find().sort({ createdAt: -1 });
+        res.json(projects);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 // GET a single project by ID
 export const getProjectById = async (req, res) => {
-	try {
-		const project = await Project.findById(req.params.id);
-		if (!project) return res.status(404).json({ message: "Project not found" });
-		res.json(project);
-	} catch (error) {
-		res.status(500).json({ message: error.message });
-	}
+    try {
+        const project = await Project.findById(req.params.id);
+        if (!project) return res.status(404).json({ message: "Project not found" });
+        res.json(project);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 // POST create a new project
 export const createProject = async (req, res) => {
-	const { title, description, category, technologies, url, repository } =
-		req.body;
-	const image = req.file;
+    const { title, description, category, technologies, url, repository } = req.body;
+    const image = req.file;
 
-	// Pastikan kategori menjadi array, meskipun input berupa string
-	const categoriesArray =
-		typeof category === "string"
-			? category.split(",").map((item) => item.trim())
-			: category;
+    // Pastikan kategori menjadi array, meskipun input berupa string
+    const categoriesArray =
+        typeof category === "string" ? category.split(",").map((item) => item.trim()) : category;
 
-	if (!image) {
-		return res.status(400).json({ message: "Image is required" });
-	}
+    if (!image) {
+        return res.status(400).json({ message: "Image is required" });
+    }
 
-	try {
-		const uploadedImage = await imagekit.upload({
-			file: image.buffer,
-			fileName: image.originalname,
-			folder: "projects",
-		});
+    try {
+        const uploadedImage = await imagekit.upload({
+            file: image.buffer,
+            fileName: image.originalname,
+            folder: "projects",
+        });
 
-		const imageUrl = uploadedImage.url;
+        const imageUrl = uploadedImage.url;
 
-		const newProject = new Project({
-			title,
-			description,
-			category: categoriesArray, // Simpan sebagai array
-			technologies,
-			url,
-			repository,
-			image: imageUrl,
-		});
+        const newProject = new Project({
+            title,
+            description,
+            category: categoriesArray, // Simpan sebagai array
+            technologies,
+            url,
+            repository,
+            image: imageUrl,
+        });
 
-		const savedProject = await newProject.save();
-		res.status(201).json(savedProject);
-	} catch (error) {
-		res.status(400).json({ message: error.message });
-	}
+        const savedProject = await newProject.save();
+        res.status(201).json(savedProject);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 };
 
 // PUT update a project
 export const updateProject = async (req, res) => {
-	try {
-		const project = await Project.findById(req.params.id);
-		if (!project) return res.status(404).json({ message: "Project not found" });
+    try {
+        const project = await Project.findById(req.params.id);
+        if (!project) return res.status(404).json({ message: "Project not found" });
 
-		const image = req.file;
+        const image = req.file;
 
-		// Ubah kategori menjadi array jika inputnya berupa string
-		if (req.body.category) {
-			req.body.category =
-				typeof req.body.category === "string"
-					? req.body.category.split(",").map((item) => item.trim())
-					: req.body.category;
-		}
+        // Ubah kategori menjadi array jika inputnya berupa string
+        if (req.body.category) {
+            req.body.category =
+                typeof req.body.category === "string"
+                    ? req.body.category.split(",").map((item) => item.trim())
+                    : req.body.category;
+        }
 
-		if (image) {
-			const uploadedImage = await imagekit.upload({
-				file: image.buffer,
-				fileName: image.originalname,
-				folder: "projects",
-			});
+        if (image) {
+            const uploadedImage = await imagekit.upload({
+                file: image.buffer,
+                fileName: image.originalname,
+                folder: "projects",
+            });
 
-			req.body.image = uploadedImage.url;
-		}
+            req.body.image = uploadedImage.url;
+        }
 
-		Object.assign(project, req.body);
-		const updatedProject = await project.save();
-		res.json(updatedProject);
-	} catch (error) {
-		res.status(400).json({ message: error.message });
-	}
+        Object.assign(project, req.body);
+        const updatedProject = await project.save();
+        res.json(updatedProject);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 };
 
 // DELETE a project
 export const deleteProject = async (req, res) => {
-	try {
-		const project = await Project.findById(req.params.id);
-		if (!project) return res.status(404).json({ message: "Project not found" });
+    try {
+        const project = await Project.findByIdAndDelete(req.params.id);
+        if (!project) return res.status(404).json({ message: "Project not found" });
 
-		await project.remove();
-		res.json({ message: "Project deleted" });
-	} catch (error) {
-		res.status(500).json({ message: error.message });
-	}
+        res.json({ message: "Project deleted" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
